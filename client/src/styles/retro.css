@@ -1,0 +1,351 @@
+/* ════════════════════════════════════════════
+   RETRO.CSS — CEREBRO Global Design System
+   VT323 monospace font, red/green phosphor theme
+   ════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* ── RESET ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0a0a0a;
+  color: #00ff41;
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── APP LAYOUT ── */
+.app-root {
+  position: relative;
+  z-index: 1;
+}
+
+.app-root.upside-down {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1.5rem;
+  border-bottom: 1px solid #ff0000;
+  background: rgba(10, 10, 10, 0.95);
+  position: relative;
+  z-index: 100;
+}
+
+.header-title {
+  color: #ff0000;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: flicker 3s infinite;
+}
+
+.field-agent-label {
+  display: none;
+  color: #ff6600;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+.upside-down-toggle {
+  font-size: 0.9rem !important;
+  padding: 0.3rem 0.8rem !important;
+}
+
+.app-main {
+  position: relative;
+  z-index: 2;
+  padding: 1rem;
+}
+
+/* ── PANELS ── */
+.retro-panel {
+  border: 1px solid #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3), inset 0 0 10px rgba(255, 0, 0, 0.05);
+  background: rgba(10, 10, 10, 0.95);
+  padding: 1.5rem;
+  border-radius: 2px;
+}
+
+/* ── BUTTONS ── */
+.retro-button {
+  background: transparent;
+  border: 2px solid #ff0000;
+  color: #ff0000;
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+  transition: all 0.1s;
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-button:hover {
+  background: #ff0000;
+  color: #0a0a0a;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+}
+
+.retro-button:active {
+  transform: scale(0.96);
+}
+
+.retro-button.green {
+  border-color: #00ff41;
+  color: #00ff41;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+}
+
+.retro-button.green:hover {
+  background: #00ff41;
+  color: #0a0a0a;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.8);
+}
+
+/* ── INPUTS ── */
+.retro-input {
+  background: #0a0a0a;
+  border: 1px solid #ff0000;
+  color: #00ff41;
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.8rem;
+  outline: none;
+  width: 100%;
+  transition: box-shadow 0.2s;
+}
+
+.retro-input:focus {
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.retro-input::placeholder {
+  color: rgba(0, 255, 65, 0.3);
+}
+
+/* ── STATUS INDICATORS ── */
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00ff41;
+  display: inline-block;
+  animation: pulse 1.5s infinite;
+}
+
+.status-dot.red {
+  background: #ff0000;
+}
+
+.status-dot.amber {
+  background: #ffaa00;
+}
+
+/* ── SECTION HEADERS ── */
+.section-header {
+  color: #ff0000;
+  border-bottom: 1px solid #ff0000;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.4rem;
+}
+
+/* ── BADGES ── */
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  border-radius: 2px;
+}
+
+.badge.broadcaster {
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid #ff0000;
+  color: #ff0000;
+}
+
+.badge.listener {
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid #00ff41;
+  color: #00ff41;
+}
+
+/* ── LIVE INDICATOR ── */
+.live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #ff0000;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+.live-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff0000;
+  animation: pulse 1s infinite;
+  box-shadow: 0 0 8px #ff0000;
+}
+
+/* ── SYNC BADGES ── */
+.sync-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  font-size: 1rem;
+  border-radius: 2px;
+}
+
+.sync-badge.synced {
+  background: rgba(0, 255, 65, 0.15);
+  border: 1px solid #00ff41;
+  color: #00ff41;
+}
+
+.sync-badge.drifting {
+  background: rgba(255, 170, 0, 0.15);
+  border: 1px solid #ffaa00;
+  color: #ffaa00;
+  animation: blink 1s infinite;
+}
+
+.sync-badge.lost {
+  background: rgba(255, 0, 0, 0.15);
+  border: 1px solid #ff0000;
+  color: #ff0000;
+  animation: blink 0.5s infinite;
+}
+
+/* ── OVERLAY ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 10, 0.9);
+  z-index: 50;
+}
+
+.overlay-text {
+  color: #ff0000;
+  font-size: 2rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  animation: flicker 2s infinite;
+}
+
+/* ── COUNTDOWN ── */
+.countdown-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 10, 0.95);
+  z-index: 9999;
+}
+
+.countdown-number {
+  font-size: 12rem;
+  color: #ff0000;
+  text-shadow: 0 0 40px #ff0000, 0 0 80px #ff4444;
+  animation: glitch 0.3s infinite;
+}
+
+/* ── COPY BUTTON ── */
+.copy-button {
+  background: transparent;
+  border: 1px solid #00ff41;
+  color: #00ff41;
+  font-family: 'VT323', monospace;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.copy-button:hover {
+  background: #00ff41;
+  color: #0a0a0a;
+}
+
+/* ── ERROR SCREEN ── */
+.error-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 1rem;
+}
+
+.error-screen h1 {
+  color: #ff0000;
+  font-size: 3rem;
+  animation: glitch 0.5s infinite;
+  letter-spacing: 6px;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff0000;
+  border-radius: 3px;
+}
+
+/* ── MOBILE (< 768px) ── */
+@media (max-width: 768px) {
+  .app-main {
+    padding: 0.5rem;
+  }
+
+  .field-agent-label {
+    display: inline;
+  }
+
+  .retro-panel {
+    padding: 0.8rem;
+  }
+
+  .countdown-number {
+    font-size: 6rem;
+  }
+
+  .error-screen h1 {
+    font-size: 1.8rem;
+  }
+}
