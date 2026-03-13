@@ -1,0 +1,118 @@
+/* ════════════════════════════════════════════
+   CRT.CSS — CRT Monitor Frame Effect
+   Scanlines, curvature, phosphor glow, vignette
+   ════════════════════════════════════════════ */
+
+.crt-frame {
+  position: relative;
+  border: 12px solid #1a1a1a;
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 2px #333,
+    0 0 30px rgba(0, 255, 65, 0.2),
+    inset 0 0 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  background: #000;
+}
+
+/* Live mode: red phosphor glow instead of green */
+.crt-frame.live {
+  box-shadow:
+    0 0 0 2px #333,
+    0 0 30px rgba(255, 0, 0, 0.3),
+    inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Scanline overlay */
+.crt-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+  animation: scanlineScroll 8s linear infinite;
+}
+
+/* Vignette effect — darker edges for CRT realism */
+.crt-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 11;
+}
+
+/* REC indicator for live broadcasts */
+.crt-rec {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 20;
+  font-size: 1rem;
+  color: #ff0000;
+  letter-spacing: 2px;
+}
+
+.crt-rec-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff0000;
+  animation: pulse 1s infinite;
+  box-shadow: 0 0 6px #ff0000;
+}
+
+/* SIGNAL LOST static noise overlay */
+.crt-static {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0.03) 0px,
+      transparent 1px,
+      transparent 3px
+    );
+  animation: staticNoise 0.15s steps(4) infinite;
+}
+
+.crt-static-text {
+  color: #ff0000;
+  font-size: 2rem;
+  letter-spacing: 6px;
+  animation: glitch 0.3s infinite;
+  text-shadow: 0 0 20px #ff0000;
+}
+
+/* Slight screen curvature effect via perspective */
+.crt-screen {
+  position: relative;
+  transform: perspective(800px) rotateX(0.5deg);
+  overflow: hidden;
+}
+
+.crt-screen video,
+.crt-screen iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}

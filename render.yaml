@@ -1,0 +1,40 @@
+services:
+  # ----------------------------------------------------------------------------
+  # BACKEND: Cerebro Sync Server
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: cerebro-sync-server
+    runtime: node
+    plan: free # Change to 'starter' if needed
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        sync: false # User must provide this in Render Dashboard
+      - key: CLIENT_URL
+        fromService:
+          type: static
+          name: cerebro-sync-client
+          property: url
+
+  # ----------------------------------------------------------------------------
+  # FRONTEND: Cerebro Sync Client
+  # ----------------------------------------------------------------------------
+  - type: static
+    name: cerebro-sync-client
+    runtime: web
+    plan: free
+    rootDir: client
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    envVars:
+      - key: VITE_SERVER_URL
+        fromService:
+          type: web
+          name: cerebro-sync-server
+          property: url
